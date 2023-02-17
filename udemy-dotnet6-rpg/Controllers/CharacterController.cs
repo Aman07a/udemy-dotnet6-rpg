@@ -7,12 +7,22 @@ namespace udemy_dotnet6_rpg.Controllers
 	[ApiController]
 	public class CharacterController : ControllerBase
 	{
-		private static Character knight = new Character();
+		private static List<Character> characters = new List<Character>
+		{
+			new Character(),
+			new Character { Name = "Sam" }
+		};
 
-		[HttpGet]
+		[HttpGet("GetAll")]
 		public ActionResult<Character> Get()
 		{
-			return Ok(knight);
+			return Ok(characters);
+		}
+
+		[HttpGet]
+		public ActionResult<Character> GetSingle()
+		{
+			return Ok(characters[0]);
 		}
 	}
 }
