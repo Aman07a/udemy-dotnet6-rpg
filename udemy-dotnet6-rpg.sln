@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "udemy-dotnet6-rpg", "udemy-dotnet6-rpg\udemy-dotnet6-rpg.csproj", "{A3415788-D9B0-43AA-8C71-B344CC7B26AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3415788-D9B0-43AA-8C71-B344CC7B26AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3415788-D9B0-43AA-8C71-B344CC7B26AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3415788-D9B0-43AA-8C71-B344CC7B26AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3415788-D9B0-43AA-8C71-B344CC7B26AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0495A28E-A94D-4BCF-AC5A-AD288B268B54}
+	EndGlobalSection
+EndGlobal
