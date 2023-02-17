@@ -1,5 +1,8 @@
-﻿namespace udemy_dotnet6_rpg.Models
+﻿using System.Text.Json.Serialization;
+
+namespace udemy_dotnet6_rpg.Models
 {
+	[JsonConverter(typeof(JsonStringEnumConverter))]
 	public enum RpgClass
 	{
 		Knight = 1,
