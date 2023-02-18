@@ -1,6 +1,7 @@
 global using udemy_dotnet6_rpg.Models;
 global using udemy_dotnet6_rpg.Services.CharacterService;
 global using udemy_dotnet6_rpg.DTOS.Character;
+global using udemy_dotnet6_rpg.DTOS.User;
 global using udemy_dotnet6_rpg.Data;
 global using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ICharacterService, CharacterService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 var app = builder.Build();
 
