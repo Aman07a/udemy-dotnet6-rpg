@@ -31,5 +31,18 @@ namespace udemy_dotnet6_rpg.Controllers
 		{
 			return Ok(await _characterService.AddCharacter(newCharacter));
 		}
+
+		[HttpPut]
+		public async Task<ActionResult<ServiceResponse<GetCharacterDTO>>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
+		{
+			var response = await _characterService.UpdateCharacter(updatedCharacter);
+
+			if (response.Data == null)
+			{
+				return NotFound(response);
+			}
+
+			return Ok(response);
+		}
 	}
 }
