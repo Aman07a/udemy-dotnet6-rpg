@@ -1,4 +1,6 @@
-﻿namespace udemy_dotnet6_rpg.Services.CharacterService
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace udemy_dotnet6_rpg.Services.CharacterService
 {
 	public class CharacterService : ICharacterService
 	{
@@ -8,10 +10,12 @@
 		};
 
 		private readonly IMapper _mapper;
+		private readonly DataContext _context;
 
-		public CharacterService(IMapper mapper)
+		public CharacterService(IMapper mapper, DataContext context)
 		{
 			_mapper = mapper;
+			_context = context;
 		}
 
 		public async Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter)
@@ -45,17 +49,17 @@
 
 		public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
 		{
-			return new ServiceResponse<List<GetCharacterDTO>>
-			{
-				Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList()
-			};
+			var response = new ServiceResponse<List<GetCharacterDTO>>();
+			var dbCharacters = await _context.Characters.ToListAsync();
+			response.Data = dbCharacters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
+			return response;
 		}
 
 		public async Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id)
 		{
 			var serviceResponse = new ServiceResponse<GetCharacterDTO>();
-			var character = characters.FirstOrDefault(c => c.Id == id);
-			serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
+			var dbCharacter = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+			serviceResponse.Data = _mapper.Map<GetCharacterDTO>(dbCharacter);
 			return serviceResponse;
 		}
 
