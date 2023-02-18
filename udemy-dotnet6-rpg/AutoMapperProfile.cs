@@ -1,0 +1,11 @@
+﻿namespace udemy_dotnet6_rpg
+{
+	public class AutoMapperProfile: Profile
+	{
+		public AutoMapperProfile()
+		{
+			CreateMap<Character, GetCharacterDTO>();
+			CreateMap<AddCharacterDTO, Character>();
+		}
+	}
+}
