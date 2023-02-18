@@ -1,6 +1,4 @@
-﻿using udemy_dotnet6_rpg.DTOS.Character;
-
-namespace udemy_dotnet6_rpg.Services.CharacterService
+﻿namespace udemy_dotnet6_rpg.Services.CharacterService
 {
 	public class CharacterService : ICharacterService
 	{
@@ -24,6 +22,25 @@ namespace udemy_dotnet6_rpg.Services.CharacterService
 			characters.Add(character);
 			serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
 			return serviceResponse;
+		}
+
+		public async Task<ServiceResponse<List<GetCharacterDTO>>> DeleteCharacter(int id)
+		{
+			ServiceResponse<List<GetCharacterDTO>> response = new ServiceResponse<List<GetCharacterDTO>>();
+
+			try
+			{
+				Character character = characters.First(c => c.Id == id);
+				characters.Remove(character);
+				response.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Message = ex.Message;
+			}
+
+			return response;
 		}
 
 		public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
