@@ -10,7 +10,7 @@ namespace udemy_dotnet6_rpg.Controllers
 		private static List<Character> characters = new List<Character>
 		{
 			new Character(),
-			new Character { Name = "Sam" }
+			new Character { Id = 1, Name = "Sam" }
 		};
 
 		[HttpGet("GetAll")]
@@ -19,10 +19,10 @@ namespace udemy_dotnet6_rpg.Controllers
 			return Ok(characters);
 		}
 
-		[HttpGet]
-		public ActionResult<Character> GetSingle()
+		[HttpGet("{id}")]
+		public ActionResult<Character> GetSingle(int id)
 		{
-			return Ok(characters[0]);
+			return Ok(characters.FirstOrDefault(c => c.Id == id));
 		}
 	}
 }
