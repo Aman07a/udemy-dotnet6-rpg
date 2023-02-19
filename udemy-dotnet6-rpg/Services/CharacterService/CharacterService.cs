@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using udemy_dotnet6_rpg.DTOS.Character;
+using System.Security.Claims;
 
 namespace udemy_dotnet6_rpg.Services.CharacterService
 {
@@ -7,12 +7,17 @@ namespace udemy_dotnet6_rpg.Services.CharacterService
 	{
 		private readonly IMapper _mapper;
 		private readonly DataContext _context;
+		private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public CharacterService(IMapper mapper, DataContext context)
+		public CharacterService(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
 		{
 			_mapper = mapper;
 			_context = context;
+			_httpContextAccessor = httpContextAccessor;
 		}
+
+		private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User
+			.FindFirstValue(ClaimTypes.NameIdentifier));
 
 		public async Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter)
 		{
@@ -47,11 +52,11 @@ namespace udemy_dotnet6_rpg.Services.CharacterService
 			return response;
 		}
 
-		public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters(int userId)
+		public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
 		{
 			var response = new ServiceResponse<List<GetCharacterDTO>>();
 			var dbCharacters = await _context.Characters
-				.Where(c => c.User.Id == userId)
+				.Where(c => c.User.Id == GetUserId())
 				.ToListAsync();
 			response.Data = dbCharacters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
 			return response;
