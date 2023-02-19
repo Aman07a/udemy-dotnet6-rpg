@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace udemy_dotnet6_rpg.Controllers
 {
@@ -19,7 +20,8 @@ namespace udemy_dotnet6_rpg.Controllers
 		[HttpGet("GetAll")]
 		public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> Get()
 		{
-			return Ok(await _characterService.GetAllCharacters());
+			int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+			return Ok(await _characterService.GetAllCharacters(userId));
 		}
 
 		[HttpDelete("{id}")]

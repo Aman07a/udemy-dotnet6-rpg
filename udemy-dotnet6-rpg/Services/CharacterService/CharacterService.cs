@@ -47,10 +47,12 @@ namespace udemy_dotnet6_rpg.Services.CharacterService
 			return response;
 		}
 
-		public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
+		public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters(int userId)
 		{
 			var response = new ServiceResponse<List<GetCharacterDTO>>();
-			var dbCharacters = await _context.Characters.ToListAsync();
+			var dbCharacters = await _context.Characters
+				.Where(c => c.User.Id == userId)
+				.ToListAsync();
 			response.Data = dbCharacters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
 			return response;
 		}
