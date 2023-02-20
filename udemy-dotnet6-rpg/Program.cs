@@ -4,6 +4,7 @@ global using udemy_dotnet6_rpg.Services.WeaponService;
 global using udemy_dotnet6_rpg.DTOS.Character;
 global using udemy_dotnet6_rpg.DTOS.User;
 global using udemy_dotnet6_rpg.DTOS.Weapon;
+global using udemy_dotnet6_rpg.DTOS.Skill;
 global using udemy_dotnet6_rpg.Data;
 global using AutoMapper;
 using Microsoft.EntityFrameworkCore;

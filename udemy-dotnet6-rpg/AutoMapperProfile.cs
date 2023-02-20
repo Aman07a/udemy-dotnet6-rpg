@@ -7,6 +7,7 @@
 			CreateMap<Character, GetCharacterDTO>();
 			CreateMap<AddCharacterDTO, Character>();
 			CreateMap<Weapon, GetWeaponDTO>();
+			CreateMap<Skill, GetSkillDTO>();
 		}
 	}
 }
