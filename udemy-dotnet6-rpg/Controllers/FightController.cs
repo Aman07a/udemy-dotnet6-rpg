@@ -13,5 +13,11 @@ namespace udemy_dotnet6_rpg.Controllers
 		{
 			_fightService = fightService;
 		}
+
+		[HttpPost("Weapon")]
+		public async Task<ActionResult<ServiceResponse<AttackResultDTO>>> WeaponAttack(WeaponAttackDTO request)
+		{
+			return Ok(await _fightService.WeaponAttack(request));
+		}
 	}
 }
