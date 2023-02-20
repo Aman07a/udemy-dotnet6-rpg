@@ -5,9 +5,11 @@ namespace udemy_dotnet6_rpg.Services.FightService
 	public class FightService : IFightService
 	{
 		private readonly DataContext _context;
+		private readonly IMapper _mapper;
 
-		public FightService(DataContext context)
+		public FightService(DataContext context, IMapper mapper)
 		{
+			_mapper = mapper;
 			_context = context;
 		}
 
@@ -205,6 +207,22 @@ namespace udemy_dotnet6_rpg.Services.FightService
 				opponent.HitPoints -= damage;
 
 			return damage;
+		}
+
+		public async Task<ServiceResponse<List<HighscoreDTO>>> GetHighscore()
+		{
+			var characters = await _context.Characters
+				.Where(c => c.Fights > 0)
+				.OrderByDescending(c => c.Victories)
+				.ThenBy(c => c.Defeats)
+				.ToListAsync();
+
+			var response = new ServiceResponse<List<HighscoreDTO>>()
+			{
+				Data = characters.Select(c => _mapper.Map<HighscoreDTO>(c)).ToList()
+			};
+
+			return response;
 		}
 	}
 }

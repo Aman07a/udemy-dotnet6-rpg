@@ -8,6 +8,7 @@
 			CreateMap<AddCharacterDTO, Character>();
 			CreateMap<Weapon, GetWeaponDTO>();
 			CreateMap<Skill, GetSkillDTO>();
+			CreateMap<Character, HighscoreDTO>();
 		}
 	}
 }
